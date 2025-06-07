@@ -2,44 +2,126 @@
 <html lang="en">
 
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Pinterest</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-4Q6Gf2aSP4eDXB8Miphtr37CMZZQ5oXLH2yaXMJ2w8e2ZtHTl7GptT4jmndRuHDT" crossorigin="anonymous">
-    <link rel="stylesheet" href="/stylesheets/profile.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+        integrity="sha512-dym6Z5z5xYx5+6z5xYx5+6z5xYx5+6z5xYx5+6z5xYx5+6z5xYx5+6z5xYx5+6z5xYx5+6z5xYx5+6z5xYx5+6z5"
+        crossorigin="anonymous" />
+    <link rel="stylesheet" href="/stylesheets/profile.css" />
 </head>
 
 <body>
-    <div class="containerpers">
-        <div class="cardpers">
-            <div class="profile-picture">
-                <img src="  /images/profile-img.png" alt="Profile Picture">
-            </div>
-            <h2 class="name"><%=user.fullname%></h2>
-            <h3 class="username">@<%= user.username%></h3>
-            <p class="tagline">Lorem ipsum dolor sit amet.</p>
-            <p class="description">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Distinctio?</p>
-            <a href="/logout" class="button">Logout</a>
-            <form action="/upload" method="POST" enctype="multipart/form-data">
-                <input type="text" name="filecaption" placeholder="Caption" class="detail" />
-                <input type="file" name="file" accept="image/*">
-                <button type="submit">Submit</button>
-            </form>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="navbar-left">
+            <a href="/feed" class="logo">
+                <img src="/images/Pinterest-logo.png" alt="Logo">
+            </a>
         </div>
-    </div>
-    <div class="container">
-        <div class="cards flex">
-            <% user.posts.forEach(function(post) { %>
-                <div class="card" style="width: 18rem;">
-                    <img src="/images/uploads/<%= post.image %>" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title"><%= post.imageText %></h5>
+
+        <div class="navbar-center">
+            <div class="search-box">
+                <i class="fas fa-search"></i>
+                <input type="text" placeholder="Search" />
+            </div>
+        </div>
+        <div class="navbar-right">
+            <a href="#" class="nav-icon"><i class="fas fa-bell"></i></a>
+            <a href="#" class="nav-icon"><i class="far fa-comment-dots"></i></a>
+            <a href="/profile" class="avatar">
+                <img src="/images/ashmit.png" alt="User Avatar" />
+            </a>
+            <a href="#" class="nav-icon"><i class="fas fa-chevron-down"></i></a>
+        </div>
+    </nav>
+    <!-- Hero Section -->
+    <div class="hero-section">
+        <!-- Profile Section -->
+        <section class="container my-4 profile-container">
+            <div class="row justify-content-center">
+                <div class="col-md-8 col-lg-6">
+                    <div class="cardpers">
+                        <div class="profile-picture mx-auto">
+                            <img src="/images/ashmit.png" alt="Profile Picture" />
+                        </div>
+                        <h2 class="name">
+                            <%= user.fullname %>
+                        </h2>
+                        <h3 class="username">@<%= user.username %>
+                        </h3>
+                        <p class="tagline">Inspiring Creativity, One Pin at a Time.</p>
+                        <p class="description">Discover a curated collection of design inspiration, DIY projects, and
+                            lifestyle tips to spark your imagination and fuel your creative journey.</p>
+                        <a href="/logout" class="button">Logout</a>
+                        <form action="/upload" method="POST" enctype="multipart/form-data" class="mt-3">
+                            <input type="file" name="file" accept="image/*" class="form-control mb-2" />
+                            <button type="submit" class="btn btn-danger w-100">Submit</button>
+                        </form>
                     </div>
                 </div>
-            <% }); %>
+            </div>
+        </section>
+
+        <!-- Posts Section -->
+        <div class="containerpers">
+            <% user.posts.forEach(function(post) { %>
+                <% if (post.image) { %> <!-- Ensure image exists -->
+                    <div class="boxpers">
+                        <a href="/images/uploads/<%= post.image %>">
+                            <img src="/images/uploads/<%= post.image %>" alt="image"></a>
+                    </div>
+                    <% } %>
+                        <% }); %>
         </div>
     </div>
+    <!-- Footer Section -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-column">
+                <h4>About</h4>
+                <ul>
+                    <li><a href="#">Company</a></li>
+                    <li><a href="#">Careers</a></li>
+                    <li><a href="#">Press</a></li>
+                    <li><a href="#">Blog</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h4>Support</h4>
+                <ul>
+                    <li><a href="#">Help Center</a></li>
+                    <li><a href="#">Safety</a></li>
+                    <li><a href="#">Community Guidelines</a></li>
+                    <li><a href="#">Report a Problem</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h4>Legal</h4>
+                <ul>
+                    <li><a href="#">Terms of Service</a></li>
+                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a href="#">Cookie Policy</a></li>
+                    <li><a href="#">Accessibility</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h4>Connect</h4>
+                <ul class="social-links">
+                    <li><a href="#"><i class="fab fa-facebook-f"></i> Facebook</a></li>
+                    <li><a href="#"><i class="fab fa-twitter"></i> Twitter</a></li>
+                    <li><a href="#"><i class="fab fa-instagram"></i> Instagram</a></li>
+                    <li><a href="#"><i class="fab fa-pinterest"></i> Pinterest</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 Pinterest. All rights reserved.</p>
+        </div>
+    </footer>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-j1CDi7MgGQ12Z7Qab0qlWQ/Qqz24Gc6BM0thvEMVjHnfYGF0rmFCozFSxQBxwHKO"
         crossorigin="anonymous"></script>
