@@ -179,7 +179,7 @@ body {
 
 .containerpers
 {
-  padding-top: 13vh;
+  padding-top: 5vh;
   width: 80%;
   margin: auto;
   columns: 6;
@@ -202,9 +202,17 @@ body {
 
 
 img:hover {
-  
   opacity: .95;
   box-shadow: 0 0 10px #fff;
+}
+
+.post-heading{
+    padding-top: 13vh;
+    width: 80%;
+    margin: auto;
+    font-weight: 600;
+    text-transform: capitalize;
+
 }
 
 /* Footer Styles */
